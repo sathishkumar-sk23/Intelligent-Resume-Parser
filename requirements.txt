@@ -1,0 +1,7 @@
+pdfplumber          # For extracting text from text-based PDFs
+pdf2image           # To convert PDF pages to images (for OCR)
+pytesseract         # OCR for image-based PDFs
+together            # To call Mistral model via Together API
+unidecode           # Clean and normalize extracted text
+regex               # regex handling
+python-dotenv       # For loading environment variables from .env file
