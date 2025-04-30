@@ -1,8 +1,4 @@
-Sure! Here's the cleaned-up `README.md` file **without any emojis**:
-
 ---
-
-```markdown
 # Intelligent Resume Parser
 
 A powerful and intelligent resume parsing app that extracts structured data such as name, contact, skills, experience, education, and more from uploaded PDF resumes using OCR and AI (via Together.ai's Mistral model). Built with Python and Streamlit.
