@@ -2,6 +2,10 @@ import requests
 import json
 
 def call_resume_parser(cleaned_text: str, api_key: str) -> dict:
+    """
+    Call the resume parser API with the cleaned text and return the structured JSON response.
+    
+    """
 
     prompt = f"""
     You are an expert resume parser.
@@ -13,12 +17,16 @@ def call_resume_parser(cleaned_text: str, api_key: str) -> dict:
     - Do not guess. If a field is not explicitly present in the text, set its value to the JSON null value (without quotes).
     - Read the ENTIRE content carefully, especially the profile/summary and projects section, to extract all relevant skills.
     - Add skills from projects or summary sections **only if they are not already included** in the skills list.
-    - LinkedIn: Only extract a LinkedIn URL if it is a valid personal LinkedIn profile (e.g., starts with "https://linkedin.com/in/username"). If it's just the word "LinkedIn", a logo, or a general link (e.g., "linkedin.com"), set the field to null.
+    - LinkedIn:
+        1. Only extract a LinkedIn URL if it's a valid personal profile starting with:
+            "https://linkedin.com/in/" or "https://www.linkedin.com/in/".
+        2. If the resume contains a general LinkedIn link like "linkedin.com" or just the word "LinkedIn" without a full URL, return null.
+        3. Do not guess or generate a LinkedIn URL based on name.
     - Work Experience vs. Projects:
-    - Treat as **work experience** only if BOTH a valid company name and a clear duration (e.g., "Jan 2020 – Mar 2022") are present.
-    - If any of the following are **missing** — company name, duration, or job title — classify it as a **project**.
-    - Terms like "Project", "Capstone", "Intern Project", "Practical Experience", or job simulation **should be treated as projects**, NOT experience.
-    - Extract project title and description from such entries and move them to the "projects" section.
+        1. Treat as **work experience** only if BOTH a valid company name and a clear duration (e.g., "Jan 2020 – Mar 2022") are present.
+        2. If any of the following are **missing** — company name, duration, or job title — classify it as a **project**.
+        3. Terms like "Project", "Capstone", "Intern Project", "Practical Experience", or job simulation **should be treated as projects**, NOT experience.
+        4. Extract project title and description from such entries and move them to the "projects" section.
     - Normalize all dates to "MMM YYYY" format where possible (e.g., "Jan 2020").
     - Include a confidence score (0.0–1.0) for each field in the `confidence_scores` section.
     - Return all results ONLY in this strict JSON format:
