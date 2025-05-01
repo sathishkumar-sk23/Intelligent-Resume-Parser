@@ -20,9 +20,6 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Set environment variable (optional — prefer setting it in the Render UI)
-ENV TOGETHER_API_KEY=your_default_api_key_here
-
 # Expose default Streamlit port
 EXPOSE 8501
 
