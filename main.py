@@ -34,7 +34,9 @@ if uploaded_file is not None:
                 extracted_text = extract_pdf_text(uploaded_file)
             else:
                 extracted_text = extract_text_from_image_pdf(uploaded_file)
+                st.text_area("OCR Output1", extracted_text, height=300)
                 extracted_text = preprocess_ocr(extracted_text)
+                st.text_area("OCR Output2", extracted_text, height=300)
 
             # Call resume parser
             parsed_result = call_resume_parser(extracted_text, api_key)
@@ -42,7 +44,7 @@ if uploaded_file is not None:
             # Convert to dictionary and clean null values
             parsed_result = json.loads(parsed_result)
             parsed_result = clean_json_output(parsed_result)
-            print(parsed_result)
+            # print(parsed_result)
 
         # Display the result
         st.subheader("Extracted Information")
