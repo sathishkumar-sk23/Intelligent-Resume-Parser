@@ -27,15 +27,17 @@ if uploaded_file is not None:
 
     if st.sidebar.button("Extract Information"):
         with st.spinner("Extracting information..."):
-            # Check if PDF is text-based or image-based
-            is_text_pdf = is_text_based_pdf(uploaded_file)
+            # # Check if PDF is text-based or image-based
+            # is_text_pdf = is_text_based_pdf(uploaded_file)
 
-            if is_text_pdf:
-                extracted_text = extract_pdf_text(uploaded_file)
-            else:
-                extracted_text = extract_text_from_image_pdf(uploaded_file)
-                st.text_area("OCR Output1", extracted_text, height=300)
-                extracted_text = preprocess_ocr(extracted_text)
+            # if is_text_pdf:
+            #     extracted_text = extract_pdf_text(uploaded_file)
+            # else:
+            #     extracted_text = extract_text_from_image_pdf(uploaded_file)
+            #     st.text_area("OCR Output1", extracted_text, height=300)
+            #     extracted_text = preprocess_ocr(extracted_text)
+
+            extracted_text = extract_pdf_text(uploaded_file)
 
             # Call resume parser
             parsed_result = call_resume_parser(extracted_text, api_key)
