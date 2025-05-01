@@ -1,14 +1,12 @@
----
 # Intelligent Resume Parser
 
-A powerful and intelligent resume parsing app that extracts structured data such as name, contact, skills, experience, education, and more from uploaded PDF resumes using OCR and AI (via Together.ai's Mistral model). Built with Python and Streamlit.
+A powerful AI/NLP-based resume parsing app that extracts structured information from **text-based** PDF resumes using the Mistral model via the Together.ai API. Built with Python and Streamlit.
 
 ---
 
 ## Features
 
-- Supports both text-based and scanned (image-based) PDF resumes  
-- Uses OCR (Tesseract) to extract text from scanned documents  
+- Parses **text-based** PDF resumes  
 - AI-powered parsing using Mistral via Together.ai API  
 - Strict JSON schema with confidence scores for each field  
 - Post-processing to clean malformed emails and null values  
@@ -18,18 +16,41 @@ A powerful and intelligent resume parsing app that extracts structured data such
 
 ## Extracted Fields
 
-The parser returns structured JSON with the following fields:
+```json
+{
+  "name": "",
+  "email": "",
+  "phone": "",
+  "linkedin": "",
+  "skills": [],
+  "education": [
+    { "degree": "", "institution": "", "year": "" }
+  ],
+  "experience": [
+    {
+      "company": "",
+      "title": "",
+      "duration": "",
+      "description": ""
+    }
+  ],
+  "certifications": [],
+  "projects": [],
+  "confidence_scores": {
+    "name": 0.0,
+    "email": 0.0,
+    "phone": 0.0,
+    "linkedin": 0.0,
+    "skills": 0.0,
+    "education": 0.0,
+    "experience": 0.0,
+    "certifications": 0.0,
+    "projects": 0.0
+  }
+}
+```
 
-- `name`  
-- `email`  
-- `phone`  
-- `linkedin`  
-- `skills` (list)  
-- `education` (degree, institution, year)  
-- `experience` (company, title, duration, description)  
-- `projects` (title, description)  
-- `certifications`  
-- `confidence_scores` (for each major section)  
+Missing fields return `null`.
 
 ---
 
@@ -44,39 +65,32 @@ cd Intelligent-Resume-Parser
 
 ### 2. Install Dependencies
 
-Create and activate a virtual environment:
-
 ```bash
 python -m venv venv
 source venv/bin/activate      # macOS/Linux
 venv\Scripts\activate         # Windows
-```
 
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
 ```
 
----
-
 ### 3. Setup Environment Variables
 
-Create a `.env` file in the root directory and add your Together.ai API key:
+Create a `.env` file:
 
 ```env
 TOGETHER_API_KEY=your_together_api_key
+HUGGINGFACE_API_KEY=your_huggingface_token
 ```
 
----
+> **Do not** commit `.env` — add it to `.gitignore`.
 
-### 4. Run the App
+### 4. Run the App Locally
 
 ```bash
 streamlit run main.py
 ```
 
-Upload a resume PDF in the sidebar and click "Extract Information".
+Upload a PDF resume through the sidebar and click **Extract Information**.
 
 ---
 
@@ -85,23 +99,43 @@ Upload a resume PDF in the sidebar and click "Extract Information".
 ```
 .
 ├── main.py                # Streamlit frontend
-├── .env                   # API Key (not tracked by Git)
 ├── requirements.txt
+├── .env                   # API Keys (not tracked)
 ├── src
 │   ├── parser.py          # Calls Together.ai API
-│   └── utils.py           # Text extraction & cleaning
-└── notebooks
-    └── ResumeParser.ipynb # Development notebook
+│   └── utils.py           # PDF text extraction & cleaning
+└── sample_resumes/        # Test resume PDFs
 ```
 
 ---
 
+## Tools & Libraries
 
-## Credits
-
-- pdfplumber  
-- pytesseract  
-- Together.ai  
-- Streamlit  
+- **pdfplumber** — text extraction from PDF  
+- **Together.ai** (Mistral) — AI parsing API  
+- **Streamlit** — web interface  
+- **python-dotenv** — environment variable loader  
+- **unidecode**, **regex** — text cleaning  
 
 ---
+
+## Neurabit Challenge Highlights
+
+- Handles **text-based** PDF resumes  
+- Normalizes date formats (e.g., “Jan 2020 – Mar 2022”)  
+- Includes **confidence score** (0–1) per field  
+- Returns `null` for missing data  
+
+---
+
+## Limitations
+
+- May struggle with **complex layouts** (tables, multi-column text)  
+- Extraction quality depends on **resume formatting**  
+- Date normalization may require additional edge-case logic  
+
+---
+
+## 🔗 Live Demo
+
+*(Paste your deployed Streamlit URL here once live)*
