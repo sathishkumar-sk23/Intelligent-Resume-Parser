@@ -138,4 +138,4 @@ Upload a PDF resume through the sidebar and click **Extract Information**.
 
 ## 🔗 Live Demo
 
-*(Paste your deployed Streamlit URL here once live)*
+*(https://intelligent-resume-parser.onrender.com)*
