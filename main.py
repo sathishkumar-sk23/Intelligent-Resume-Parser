@@ -36,7 +36,6 @@ if uploaded_file is not None:
                 extracted_text = extract_text_from_image_pdf(uploaded_file)
                 st.text_area("OCR Output1", extracted_text, height=300)
                 extracted_text = preprocess_ocr(extracted_text)
-                st.text_area("OCR Output2", extracted_text, height=300)
 
             # Call resume parser
             parsed_result = call_resume_parser(extracted_text, api_key)

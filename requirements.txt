@@ -6,4 +6,3 @@ unidecode           # Clean and normalize extracted text
 regex               # regex handling
 python-dotenv       # For loading environment variables from .env file
 streamlit           # For building the web app interface
-poppler-utils       # For PDF to image conversion (used by pdf2image)
