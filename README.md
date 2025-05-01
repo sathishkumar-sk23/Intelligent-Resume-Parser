@@ -79,7 +79,6 @@ Create a `.env` file:
 
 ```env
 TOGETHER_API_KEY=your_together_api_key
-HUGGINGFACE_API_KEY=your_huggingface_token
 ```
 
 > **Do not** commit `.env` — add it to `.gitignore`.
