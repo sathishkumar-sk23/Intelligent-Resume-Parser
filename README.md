@@ -138,4 +138,4 @@ Upload a PDF resume through the sidebar and click **Extract Information**.
 
 ## 🔗 Live Demo
 
-*(https://intelligent-resume-parser.onrender.com)*
+*https://intelligent-resume-parser.onrender.com*
